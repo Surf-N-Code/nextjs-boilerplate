@@ -1,0 +1,85 @@
+curl https://api.notion.com/v1/blocks/dfe39b1ea2e7423e93a0ce89528451ea/children -H "Authorization: Bearer secret_Nxoq35Fx1fQboWi4ey3eEUT35RxrBykXzQObhIIrkyu" -H "Notion-Version: 2022-06-28"
+
+page id:dfe39b1ea2e7423e93a0ce89528451ea
+
+#NOTION_API_KEY=secret_Nxoq35Fx1fQboWi4ey3eEUT35RxrBykXzQObhIIrkyu
+#NOTION_DATABASE_ID=dfe39b1ea2e7423e93a0ce89528451ea
+
+tutorial
+
+import { Client } from "@notionhq/client";
+...
+const env = process.env.NETLIFY_ENV || "dev";
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const databaseId = process.env.NOTION_DATABASE_ID;
+
+const queryOptions = {
+ database_id: databaseId,
+ sorts: [
+   {
+     property: "Date",
+     direction: "descending",
+   },
+ ],
+};
+
+//If in production, filter to only published posts
+if (env === "production") {
+ queryOptions.filter = {
+   property: "Published",
+   checkbox: {
+     equals: true,
+   },
+ };
+}
+
+const posts = await notion.databases.query(queryOptions);
+return {
+ statusCode: 200,
+ body: JSON.stringify(posts),
+};
+
+
+
+
+
+import { Client } from "@notionhq/client";
+import { NotionToMarkdown } from "notion-to-md";
+...
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const { id: postId } = event.queryStringParameters;
+
+if (postId) {
+ const response = await notion.pages.retrieve({ page_id: postId });
+ const n2m = new NotionToMarkdown({ notionClient: notion });
+ const mdblocks = await n2m.pageToMarkdown(postId);
+ const mdString = n2m.toMarkdownString(mdblocks);
+
+ const responseData = {
+  bannerImg: response.cover.external.url,
+  markdown: mdString,
+  title: response.properties.Title.title[0].plain_text
+ };
+
+ return {
+   statusCode: 200,
+   body: JSON.stringify(responseData),
+ };
+}
+
+https://github.com/souvikinator/notion-to-md#
+
+
+<Layout/>
+ <img
+   src={bannerImg}
+   alt=""
+   className="block w-full h-48 md:h-56 lg:h-64 xl:h-80 object-cover object-center"
+ />
+ <article className="max-w-screen-sm m-auto px-4 pt-4 pb-10">
+  <h1 className="my-6 text-4xl font-bold">{title}</h1>
+  <ReactMarkdown components={markdownMapping}>
+    {markdown}
+  </ReactMarkdown>
+ </article>
+</Layout>

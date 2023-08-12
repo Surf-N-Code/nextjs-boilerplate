@@ -1,0 +1,44 @@
+{
+  "name": "pic2quote",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.10.2",
+    "@headlessui/react": "^1.7.16",
+    "@heroicons/react": "^2.0.18",
+    "@next/font": "^13.4.10",
+    "@notionhq/client": "^2.2.9",
+    "@supabase/auth-helpers-nextjs": "^0.6.1",
+    "@supabase/auth-ui-react": "^0.4.2",
+    "@supabase/auth-ui-shared": "^0.1.6",
+    "@supabase/supabase-js": "^2.31.0",
+    "autoprefixer": "10.4.14",
+    "clsx": "^2.0.0",
+    "encoding": "^0.1.13",
+    "next": "^13.4.9",
+    "next-cloudinary": "^4.18.0",
+    "notion-to-md": "^3.1.1",
+    "postcss": "8.4.25",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.10.1",
+    "react-markdown": "^8.0.7",
+    "react-multi-carousel": "^2.8.4",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^10.1.0",
+    "tailwindcss": "3.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.17",
+    "prettier": "3.0.0",
+    "supabase": "^1.82.2"
+  }
+}
