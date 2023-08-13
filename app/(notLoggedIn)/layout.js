@@ -1,9 +1,8 @@
-import '../globals.css';
+import '@/styles/globals.css';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
-import Footer from '@/components/Footer';
-import Nav from '@/components/nav';
 import { siteConfig } from '@/config/siteConfig';
+import bg from '@/public/assets/header.png';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -63,10 +62,13 @@ export default async function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${poppins.className} h-screen`}>
-        <Nav />
-        <main className="flex-grow px-4 md:px-12">{children}</main>
-        <Footer />
+      <body
+        className={`${poppins.className} leading-normal tracking-normal text-indigo-400 m-6 bg-cover bg-fixed`}
+        style={{
+          backgroundImage: `url(${bg.src})`,
+        }}
+      >
+        <main className="h-full">{children}</main>
       </body>
     </html>
   );

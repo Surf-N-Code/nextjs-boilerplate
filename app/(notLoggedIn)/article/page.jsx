@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { AiOutlineTwitter } from 'react-icons/ai';
 import { BsLinkedin } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';

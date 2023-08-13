@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./**/*.{jsx,tsx,mdx}'],
+  content: ['./**/*.{(j|t)sx,tsx,mdx,js}'],
   theme: {
     extend: {
       backgroundImage: {
@@ -12,9 +12,6 @@ module.exports = {
         xs: ['10px', '1.5rem'],
         sm: ['14px', '1.5rem'],
         base: ['16px', '1.5rem'],
-      },
-      colors: {
-        brand: '#2D634E',
       },
     },
   },
